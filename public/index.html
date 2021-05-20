@@ -1,0 +1,72 @@
+<!DOCTYPE>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form id="login">
+        <input name="username" type="text" value="">
+        <input name="password" type="password" value="" />
+        <input type="submit" value="submit">
+    </form>
+    <script>
+        const form_login = document.getElementById("login")
+        form_login.addEventListener("submit", async(e) => {
+            try {
+                e.preventDefault();
+                const username = e.target.elements.username.value;
+                const password = e.target.elements.password.value;
+                console.log(username + password)
+                const myHeaders = new Headers();
+
+                myHeaders.append("Content-Type", "application/json");
+                var raw = JSON.stringify({
+                    username,
+                    password
+                });
+                var requestOptions = {
+                    mode: 'no-cors',
+                    method: 'POST',
+                    headers: myHeaders,
+                    body: raw,
+                    redirect: 'follow',
+                    headers: 'headers',
+                    // typ: "JWT"
+
+                };
+                // const loginRes =
+                await fetch("http://localhost:3000/users/login", requestOptions)
+                    .then(response => response.json())
+
+                // const {
+                //     token
+                // } = loginRes;
+                // //profile
+
+                // const pHeaders = new Headers();
+                // pHeaders.append("Authorization", token);
+                // //    myHeaders.append("Content-Type", "application/json");
+                // var requestOptions = {
+                //     method: 'GET',
+                //     headers: pHeaders,
+                //     body: raw,
+                //     redirect: 'follow'
+                // };
+                // const profile = await ("http://localhost:3000/users/profile", requestOptions).then(response => response.json())
+
+
+            } catch (err) {
+                console.log(err)
+
+            }
+
+
+        })
+    </script>
+</body>
+
+</html>
